@@ -1,3 +1,8 @@
+Nama  : Arta Eka Yuly Rajagukguk
+NIM  : 123140209
+Mata Kuliah  : Pengembangan Aplikasi Mobile
+
+
 MyProfileApp
 
 My Profile App adalah aplikasi Android sederhana yang dibuat menggunakan Jetpack Compose untuk menampilkan halaman profil pengguna.
