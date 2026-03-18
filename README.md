@@ -28,3 +28,7 @@ Aplikasi ini dibuat untuk memenuhi tugas praktikum mata kuliah Pengembangan Apli
 ![Screenshot](code-1.png)
 ![Screenshot](code-2.png)
 ![Screenshot](code-3.png)
+
+## Hasil AKhir
+![Screenshot](ProfileView.png)
+![Screenshot](EditForm.png)
