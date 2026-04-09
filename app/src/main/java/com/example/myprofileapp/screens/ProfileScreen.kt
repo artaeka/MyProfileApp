@@ -1,4 +1,4 @@
-package com.example.myprofileapp.ui1
+package com.example.myprofileapp.screens
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel

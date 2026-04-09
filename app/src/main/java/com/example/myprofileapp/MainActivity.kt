@@ -18,9 +18,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myprofileapp.ui.theme.MyProfileAppTheme
-import com.example.myprofileapp.ui1.ProfileScreen
+import com.example.myprofileapp.screens.ProfileScreen
 import com.example.myprofileapp.viewmodel.ProfileViewModel
 import androidx.compose.runtime.getValue
+import androidx.navigation.compose.rememberNavController
+import com.example.myprofileapp.navigation.AppNavHost
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
+import com.example.myprofileapp.navigation.Screen
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,5 +113,32 @@ fun InfoItem(label: String, value: String) {
     ) {
         Text(text = label, fontWeight = FontWeight.SemiBold)
         Text(text = value)
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.List, contentDescription = null) },
+                    label = { Text("Notes") },
+                    selected = true,
+                    onClick = { navController.navigate(Screen.Notes.route) }
+                )
+            }
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { navController.navigate(Screen.AddNote.route) }) {
+                Icon(Icons.Default.Add, contentDescription = "Add Note")
+            }
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            AppNavHost(navController = navController)
+        }
     }
 }
