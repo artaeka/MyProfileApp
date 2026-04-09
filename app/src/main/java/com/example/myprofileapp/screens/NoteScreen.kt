@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import com.example.myprofileapp.navigation.Screen
 
 @Composable
-fun NotesScreen(navController: NavHostController) {
+fun NoteScreen(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
