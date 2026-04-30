@@ -3,142 +3,32 @@ package com.example.myprofileapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.*
+import com.example.myprofileapp.newsreader.model.Article
+import com.example.myprofileapp.newsreader.ui.NewsDetailScreen
+import com.example.myprofileapp.newsreader.ui.NewsListScreen
 import com.example.myprofileapp.ui.theme.MyProfileAppTheme
-import com.example.myprofileapp.screens.ProfileScreen
-import com.example.myprofileapp.viewmodel.ProfileViewModel
-import androidx.compose.runtime.getValue
-import androidx.navigation.compose.rememberNavController
-import com.example.myprofileapp.navigation.AppNavHost
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Person
-import com.example.myprofileapp.navigation.Screen
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel: ProfileViewModel = viewModel()
-            val uiState by viewModel.uiState.collectAsState()
+            MyProfileAppTheme {
+                var selectedArticle by remember { mutableStateOf<Article?>(null) }
 
-            MyProfileAppTheme(darkTheme = uiState.isDarkMode) {
-                ProfileScreen(viewModel)
+                if (selectedArticle == null) {
+                    NewsListScreen(
+                        onArticleClick = { article ->
+                            selectedArticle = article
+                        }
+                    )
+                } else {
+                    NewsDetailScreen(
+                        article = selectedArticle!!,
+                        onBack = { selectedArticle = null }
+                    )
+                }
             }
-        }
-    }
-}
-
-@Composable
-fun MyProfileApp() {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        ProfileCard()
-    }
-}
-@Composable
-fun ProfileCard() {
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        elevation = CardDefaults.cardElevation(8.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            ProfileHeader()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            InfoItem("Email", "arta@email.com")
-            InfoItem("Phone", "+62 8123456789")
-            InfoItem("Location", "Lampung, Indonesia")
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = {}) {
-                Text("Follow")
-            }
-        }
-    }
-}
-@Composable
-fun ProfileHeader() {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            painter = painterResource(id = R.drawable.profile),
-            contentDescription = "Profile Photo",
-            modifier = Modifier
-                .size(120.dp)
-                .clip(CircleShape)
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Text(
-            text = "Arta Eka",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
-        )
-
-        Text(
-            text = "UI/UX Designer & Frontend Learner",
-            fontSize = 14.sp
-        )
-    }
-}
-@Composable
-fun InfoItem(label: String, value: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    ) {
-        Text(text = label, fontWeight = FontWeight.SemiBold)
-        Text(text = value)
-    }
-}
-
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
-
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.List, contentDescription = null) },
-                    label = { Text("Notes") },
-                    selected = true,
-                    onClick = { navController.navigate(Screen.Notes.route) }
-                )
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate(Screen.AddNote.route) }) {
-                Icon(Icons.Default.Add, contentDescription = "Add Note")
-            }
-        }
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            AppNavHost(navController = navController)
         }
     }
 }
