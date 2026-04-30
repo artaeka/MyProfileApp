@@ -43,10 +43,10 @@ Model → Repository → ViewModel → UI (Jetpack Compose)
 ![Loading State](loading%20state.png)
 
 ### Success State
-[upload screenshot disini]
+![Success State](success%20state.png)
 
 ### Detail Screen
-[upload screenshot disini]
+![Detail Screen](detail%20screen.png)
 
 ### Error State
-[upload screenshot disini]
+![Error State](error%20state%20-%201.png)
