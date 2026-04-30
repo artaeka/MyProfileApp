@@ -40,7 +40,7 @@ Model → Repository → ViewModel → UI (Jetpack Compose)
 ## Screenshots
 
 ### Loading State
-[upload screenshot disini]
+![Loading State](screenshots/loading%20state.png)
 
 ### Success State
 [upload screenshot disini]
