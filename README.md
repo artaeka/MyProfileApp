@@ -49,4 +49,6 @@ Model → Repository → ViewModel → UI (Jetpack Compose)
 ![Detail Screen](detail%20screen.png)
 
 ### Error State
-![Error State](error%20state%20-%201.png)
+![Error State](error%20state%20-1.png)
+
+![Error State](error%20state%20-%202.png)
